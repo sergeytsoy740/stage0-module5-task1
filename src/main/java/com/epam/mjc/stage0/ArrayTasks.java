@@ -1,17 +1,26 @@
 package com.epam.mjc.stage0;
 
+import java.util.Arrays;
+
 /**
  * Here are the tasks for working with the arrays.
  * <p>
  * The usage of any additional packages (such as java.util.*) is forbidden.
  */
 public class ArrayTasks {
+   /* public static void main(String[] args) {
+        for (int[] e : sortRaggedArray(new int[][]{{1, 2, 5, 4, 3, 0}, {9, 8, 7, 3}, {2, 1}})) {
+            System.out.println(Arrays.toString(e));
+        }
+
+        //toBubbleSortArray(new int[] {3, 2, 1, 1, 0, 5, 5, 10, 6});
+    }*/
 
     /**
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -25,7 +34,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] nums = new int[length];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = i + 1;
+        }
+        return nums;
     }
 
     /**
@@ -37,7 +50,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum = sum + arr[i];
+        }
+        return sum;
     }
 
     /**
@@ -50,7 +67,14 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        int numberIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                numberIndex = i;
+                return numberIndex;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -63,7 +87,13 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String buffer = "";
+        for (int i = 0; i <= arr.length / 2; i++) {
+            buffer = arr[i];
+            arr[i] = arr[arr.length - 1 - i];
+            arr[arr.length - 1 - i] = buffer;
+        }
+        return arr;
     }
 
     /**
@@ -78,7 +108,23 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
+        int positives = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                positives++;
+            }
+        }
 
+        int[] arrOfPositives = new int[positives];
+
+        int d = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                arrOfPositives[d] = arr[i];
+                ++d;
+            }
+        }
+        return arrOfPositives;
     }
 
     /**
@@ -92,6 +138,33 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
+        int[] buffer = null;
+        for (int i = 0; i < arr.length; i++) {
+            toBubbleSortArray(arr[i]);
+        }
 
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j].length > arr[j + 1].length) {
+                    buffer = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = buffer;
+                }
+            }
+        }
+        return arr;
+    }
+
+    private static void toBubbleSortArray(int[] array) {
+        int buffer2 = 0;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - 1 - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    buffer2 = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = buffer2;
+                }
+            }
+        }
     }
 }
